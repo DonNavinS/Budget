@@ -5,7 +5,7 @@ function App() {
     <div className="App">
       NBA FANTASY PLAYER SEARCH
       <div>
-        <input></input>
+        <button>Find Player</button>
       </div>
     </div>
   );
