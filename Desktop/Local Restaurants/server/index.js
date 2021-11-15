@@ -21,12 +21,22 @@ app.get("/", (req, res) => {
     res.send("TABLE UPDATED");
   });
 });
-app.post("/test", (req, res) => {
+app.post("/total", (req, res) => {
   const name = req.body.name;
   const description = req.body.description;
-  const sql = "INSERT INTO all_restaurants (name, description) VALUES (?,?);";
+  const sql = "INSERT INTO total (name, description) VALUES (?,?);";
   db.query(sql, [name, description], (err, result) => {
     res.send("TABLE UPDATED 2");
+    console.log(err);
+  });
+});
+
+app.post("/tried", (req, res) => {
+  const name = req.body.name;
+  const description = req.body.description;
+  const sql = "INSERT INTO tried (name, description) VALUES (?,?);";
+  db.query(sql, [name, description], (err, result) => {
+    res.send("TRIED TABLE UPDATED");
     console.log(err);
   });
 });

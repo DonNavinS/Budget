@@ -3,14 +3,25 @@ import Axios from "axios";
 import { useState } from "react";
 
 function App() {
-  const [restName, setRestName] = useState("");
-  const [restDesc, setRestDesc] = useState("");
-  const updateTable = () => {
-    Axios.post("http://localhost:3001/test", {
-      name: restName,
-      description: restDesc,
+  const [totalRestName, setRestName] = useState("");
+  const [totalRestDesc, setRestDesc] = useState("");
+  const updateTotal = () => {
+    Axios.post("http://localhost:3001/total", {
+      name: totalRestName,
+      description: totalRestDesc,
     }).then(() => {
-      alert("DB TABLE UPDATED");
+      alert("TOTAL RESTAURANTS TABLE UPDATED");
+    });
+  };
+
+  const [triedRestName, setTriedRestName] = useState("");
+  const [triedRestDesc, setTriedRestDesc] = useState("");
+  const updateTried = () => {
+    Axios.post("http://localhost:3001/tried", {
+      name: triedRestName,
+      description: triedRestDesc,
+    }).then(() => {
+      alert("TRIED RESTAURANTS TABLE UPDATED");
     });
   };
 
@@ -19,19 +30,36 @@ function App() {
       <div>
         <input
           type="text"
-          name="restName"
+          name="totalRestName"
           onChange={(e) => {
             setRestName(e.target.value);
           }}
         ></input>
         <input
           type="text"
-          name="restDesc"
+          name="totalRestDesc"
           onChange={(e) => {
             setRestDesc(e.target.value);
           }}
         ></input>
-        <button onClick={updateTable}>Submit</button>
+        <button onClick={updateTotal}>Submit</button>
+      </div>
+      <div>
+        <input
+          type="text"
+          name="triedRestName"
+          onChange={(e) => {
+            setTriedRestName(e.target.value);
+          }}
+        ></input>
+        <input
+          type="text"
+          name="triedRestDesc"
+          onChange={(e) => {
+            setTriedRestDesc(e.target.value);
+          }}
+        ></input>
+        <button onClick={updateTried}>Submit</button>
       </div>
     </div>
   );
