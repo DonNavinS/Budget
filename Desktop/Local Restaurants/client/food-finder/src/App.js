@@ -3,6 +3,10 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 
 function App() {
+  const [retrievedTotalCounter, setRetrievedTotalCounter] = useState(0);
+  const [retrievedTriedCounter, setRetrievedTriedCounter] = useState(0);
+
+  // ADD DATA TO TABLES
   const [totalRestName, setRestName] = useState("");
   const [totalRestDesc, setRestDesc] = useState("");
   const updateTotal = () => {
@@ -10,7 +14,7 @@ function App() {
       name: totalRestName,
       description: totalRestDesc,
     }).then(() => {
-      alert("TOTAL RESTAURANTS TABLE UPDATED");
+      setRetrievedTotalCounter(retrievedTotalCounter + 1);
     });
   };
 
@@ -21,25 +25,36 @@ function App() {
       name: triedRestName,
       description: triedRestDesc,
     }).then(() => {
-      alert("TRIED RESTAURANTS TABLE UPDATED");
+      setRetrievedTriedCounter(retrievedTriedCounter + 1);
     });
   };
 
+  // RETRIEVE AND DISPLAY DATA FROM TABLES
   const [retrievedTotal, setRetrievedTotal] = useState([]);
   useEffect(() => {
     Axios.get("http://localhost:3001/retrieve/total").then((response) => {
       console.log(response.data);
       setRetrievedTotal(response.data);
     });
-  }, []);
+  }, [retrievedTotalCounter]);
 
   const [retrievedTried, setRetrievedTried] = useState([]);
   useEffect(() => {
     Axios.get("http://localhost:3001/retrieve/tried").then((response) => {
       setRetrievedTried(response.data);
     });
-  }, []);
+  }, [retrievedTriedCounter]);
 
+  // REMOVE DATA FROM TABLES
+  const removeFromTotal = (id) => {
+    Axios.delete(`http://localhost:3001/delete/total/${id}`).then(() => {});
+    setRetrievedTotalCounter(retrievedTotalCounter + 1);
+  };
+
+  const removeFromTried = (id) => {
+    Axios.delete(`http://localhost:3001/delete/tried/${id}`).then(() => {});
+    setRetrievedTriedCounter(retrievedTriedCounter + 1);
+  };
   return (
     <div className="App homepage">
       <div className="total-container">
@@ -64,10 +79,13 @@ function App() {
         <div className="total-table">
           {retrievedTotal.map((item) => {
             return (
-              <p>
+              <div key={item.ID}>
                 {" "}
                 {item.Name} : {item.Description}{" "}
-              </p>
+                <button onClick={() => removeFromTotal(item.ID)}>
+                  Remove From List
+                </button>
+              </div>
             );
           })}
         </div>
@@ -93,10 +111,13 @@ function App() {
         <div className="tried-table">
           {retrievedTried.map((item) => {
             return (
-              <p>
+              <div key={item.ID}>
                 {" "}
                 {item.Name} : {item.Description}{" "}
-              </p>
+                <button onClick={() => removeFromTried(item.ID)}>
+                  Remove From List
+                </button>
+              </div>
             );
           })}
         </div>

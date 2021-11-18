@@ -14,13 +14,6 @@ const db = mysql.createConnection({
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  const sql =
-    'INSERT INTO all_restaurants (name, description) VALUES ("Test1", "Test2");';
-  db.query(sql, (err, result) => {
-    res.send("TABLE UPDATED");
-  });
-});
 app.post("/total", (req, res) => {
   const name = req.body.name;
   const description = req.body.description;
@@ -51,6 +44,18 @@ app.get("/retrieve/total", (req, res) => {
 app.get("/retrieve/tried", (req, res) => {
   db.query("SELECT * FROM tried", (err, result) => {
     res.send(result);
+  });
+});
+
+app.delete("/delete/total/:id", (req, res) => {
+  db.query(`DELETE FROM total WHERE ID=${req.params.id}`, (err, result) => {
+    console.log(err);
+  });
+});
+
+app.delete("/delete/tried/:id", (req, res) => {
+  db.query(`DELETE FROM tried WHERE ID=${req.params.id}`, (err, result) => {
+    console.log(err);
   });
 });
 

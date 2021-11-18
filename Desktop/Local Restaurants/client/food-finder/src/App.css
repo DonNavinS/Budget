@@ -58,7 +58,7 @@ input {
 }
 
 button {
-  width: 25%;
+  width: auto;
 }
 
 .homepage {
