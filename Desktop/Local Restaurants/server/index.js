@@ -41,6 +41,19 @@ app.post("/tried", (req, res) => {
   });
 });
 
+app.get("/retrieve/total", (req, res) => {
+  db.query("SELECT * FROM total;", (err, result) => {
+    console.log(result);
+    res.send(result);
+  });
+});
+
+app.get("/retrieve/tried", (req, res) => {
+  db.query("SELECT * FROM tried", (err, result) => {
+    res.send(result);
+  });
+});
+
 app.listen(3001, () => {
   console.log("Listening on port 3001");
 });

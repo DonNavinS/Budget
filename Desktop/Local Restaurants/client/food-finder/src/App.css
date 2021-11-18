@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+input {
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+}
+
+.total-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin: 40px;
+}
+
+.tried-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin: 40px;
+}
+
+button {
+  width: 25%;
+}
+
+.homepage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
