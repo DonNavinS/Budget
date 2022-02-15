@@ -1,19 +1,18 @@
 import { useState, useContext } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Transactions from "./components/Transactions";
-import { GlobalContext, GlobalProvider } from "./context/GlobalState";
+import { ContextProvider, transactionContext } from "./Context/transactionContext";
+
 
 function App() {
-  const context = useContext(GlobalContext);
-  console.log(context);
+  const transactions = useContext(transactionContext)
+
+  console.log(transactions)
   return (
-    <GlobalProvider>
-      <div className="container is-flex justify-content-center">
-        <div>{context.transactions[0].ID}</div>
-      </div>
-    </GlobalProvider>
-  );
+    <ContextProvider>
+      <div>{transactions.transactions[0].name}</div>
+
+    </ContextProvider>
+  )
 }
 
 export default App;
