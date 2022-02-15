@@ -1,17 +1,27 @@
 import React, {createContext, useReducer} from "react"
 import stateReducer from "./stateReducer"
 
-export const transactionContext = createContext({
+const initialState = {
     transactions: [
-        {name: "First", ID: 1, Amount: 10},
-        {name: "Second", ID: 2, Amount: 20}
+    {name: "First", Amount:"10"},    
+    {name: "Second", Amount:"20"}    
+    
     ]
-})
+}
+export const transactionContext = createContext(initialState)
 
 export const ContextProvider = ({children}) => {
-    const [state, dispatch] = useReducer(stateReducer, transactionContext)
+    const [state, dispatch] = useReducer(stateReducer, initialState.transactions)
+
+    
+const addTransaction = () => {
+    dispatch({
+        type: "ADD"
+    })
+}
+
     return (
-        <transactionContext.Provider value={state.transactions}>
+        <transactionContext.Provider value={{state: state, addTransaction}}>
             {children}
         </transactionContext.Provider>
     )
