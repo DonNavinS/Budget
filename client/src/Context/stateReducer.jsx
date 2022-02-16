@@ -3,10 +3,11 @@ switch (action.type) {
     case "ADD":
 return [...state, 
 {
-    name: "new",
-    ID: Math.floor(Math.random()*10000),
-    amount: 100
+    name: action.payload.name,
+    amount: action.payload.amount
 }]
+case "RETRIEVE":
+    return state = action.payload
     default: 
     return state
 }

@@ -15,12 +15,23 @@ const db = mongoose.connection
 const {Transaction} = require("./models/Transaction")
 
 
+app.get("/retrieve", async (req, res)=> {
+    const transactions =await Transaction.find()
+    console.log(transactions);
+    res.send(transactions);
+    
+    console.log("TRANSACTIONS RECEIVED");
+})
+
 app.post("/new", (req, res)=> {
     const newName = req.body.name
-    console.log("WORKING");
+    const newAmount = req.body.amount
+    console.log("NEW TRANSACTION CREATED");
     Transaction.create({
-        name: newName
+        name: newName,
+        amount: newAmount
     })
+    res.send("NEW TRANSACTION RECEIVED")
 })
 
 
