@@ -4,7 +4,9 @@ const {connectionString} = require("./config")
 const express = require("express")
 const app = express()
 const PORT = 3001 || process.env.PORT
+const cors = require("cors")
 app.use(express.json())
+app.use(cors())
 
 
 
@@ -13,10 +15,11 @@ const db = mongoose.connection
 const {Transaction} = require("./models/Transaction")
 
 
-app.get("/new", (req, res)=> {
+app.post("/new", (req, res)=> {
+    const newName = req.body.name
     console.log("WORKING");
     Transaction.create({
-        name: "new transaction"
+        name: newName
     })
 })
 

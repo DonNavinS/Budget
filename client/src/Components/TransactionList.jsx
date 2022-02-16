@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import Axios from "axios"
 import { transactionContext } from '../Context/transactionContext'
 
 const TransactionList = () => {
@@ -7,17 +8,13 @@ const TransactionList = () => {
 
 const add = () => {
     addTransaction()
+    Axios.post("http://localhost:3001/new", {
+      name: "This is the new name"
+    }).then((response)=>console.log(response))
 }
 
 
-const storage = () => {
-    const names = localStorage.getItem("transaction names")
-console.log(names);
-}
 
-useEffect(()=> {
-    localStorage.setItem("transaction names", state)
-}, [add])
   return (
     <div>
       <button onClick={add}>ADD</button>
@@ -26,7 +23,6 @@ useEffect(()=> {
       ))}
 
 
-      <button onClick={storage}>STORAGE</button>
     </div>
   )
 }
