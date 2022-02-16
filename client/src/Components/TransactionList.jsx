@@ -5,6 +5,11 @@ import { transactionContext } from '../Context/transactionContext'
 const TransactionList = () => {
     const {state, retrieveTransactions} = useContext(transactionContext)
 
+
+const deleteTransaction = (item) => {
+Axios.delete(`http://localhost:3001/delete/${item._id}`)
+}
+
 useEffect(()=> {
 Axios.get("http://localhost:3001/retrieve").then((response)=> {
 retrieveTransactions(response.data)
@@ -15,8 +20,10 @@ retrieveTransactions(response.data)
  
       {state && state.map(item=> (
         <div key={item._id} className='flex justify-center'>
-          <div >{item.name}</div>
-          <div >{item.amount}</div>
+          <div>{item.name}</div>
+          <div>{item.amount}</div>
+          <div>{item._id}</div>
+          <button onClick={()=>deleteTransaction(item)}>DELETE</button>
         </div>
       ))}
 

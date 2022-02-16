@@ -4,7 +4,8 @@ switch (action.type) {
 return [...state, 
 {
     name: action.payload.name,
-    amount: action.payload.amount
+    amount: action.payload.amount,
+    _id: action.payload._id
 }]
 case "RETRIEVE":
     return state = action.payload

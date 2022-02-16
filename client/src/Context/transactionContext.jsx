@@ -2,10 +2,7 @@ import React, {createContext, useReducer} from "react"
 import stateReducer from "./stateReducer"
 
 const initialState = {
-    transactions: [
-    {name: "First", Amount:"10"},    
-    {name: "Second", Amount:"20"}    
-    ]
+    transactions: []
 }
 export const transactionContext = createContext(initialState)
 
@@ -13,12 +10,13 @@ export const ContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(stateReducer, initialState.transactions)
 
 
-const addTransaction = (name, amount) => {
+const addTransaction = (name, amount, id) => {
     dispatch({
         type: "ADD",
         payload: {
             name: name,
-            amount: amount
+            amount: amount,
+            _id: id
         }
     })
 }

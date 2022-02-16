@@ -13,14 +13,13 @@ app.use(cors())
 mongoose.connect(connectionString, {useNewUrlParser: true})
 const db = mongoose.connection
 const {Transaction} = require("./models/Transaction")
+const { response } = require("express")
 
 
 app.get("/retrieve", async (req, res)=> {
-    const transactions =await Transaction.find()
-    console.log(transactions);
+    const transactions = await Transaction.find()
     res.send(transactions);
     
-    console.log("TRANSACTIONS RECEIVED");
 })
 
 app.post("/new", (req, res)=> {
@@ -30,10 +29,20 @@ app.post("/new", (req, res)=> {
     Transaction.create({
         name: newName,
         amount: newAmount
+    }).then((response)=> {
+console.log(response._id);
+res.send(response._id)
     })
-    res.send("NEW TRANSACTION RECEIVED")
+
+    
 })
 
+app.delete("/delete/:id", async (req, res)=> {
+const id = req.params.id
+        // const deleted = await Transaction.findByIdAndDelete(id)
+        console.log(id)
+        // console.log(deleted)
+})
 
 app.listen(PORT, ()=> {
     db.once("open", ()=> {
