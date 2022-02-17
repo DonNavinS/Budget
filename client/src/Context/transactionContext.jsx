@@ -9,6 +9,13 @@ export const transactionContext = createContext(initialState)
 export const ContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(stateReducer, initialState.transactions)
 
+    const retrieveTransactions = (transactions) => {
+        dispatch({
+            type: "RETRIEVE",
+            payload: transactions
+        })
+    }
+
 
 const addTransaction = (name, amount, id) => {
     dispatch({
@@ -21,15 +28,17 @@ const addTransaction = (name, amount, id) => {
     })
 }
 
-const retrieveTransactions = (transactions) => {
+const deleteTransactionFromState = (id) => {
     dispatch({
-        type: "RETRIEVE",
-        payload: transactions
+        type: "DELETE",
+        payload: id
     })
 }
 
+
+
     return (
-        <transactionContext.Provider value={{state: state, addTransaction, retrieveTransactions}}>
+        <transactionContext.Provider value={{state: state, addTransaction, retrieveTransactions, deleteTransactionFromState}}>
             {children}
         </transactionContext.Provider>
     )

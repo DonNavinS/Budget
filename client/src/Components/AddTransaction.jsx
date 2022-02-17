@@ -13,7 +13,6 @@ const AddTransaction = () => {
             name: newName,
             amount: newAmount,
         }).then(response => {
-            console.log(response.data);
             addTransaction(newName, newAmount, response.data)
         })
     }
@@ -22,9 +21,6 @@ const AddTransaction = () => {
         <input type="text" placeholder='Transaction Name' onChange={(e)=>setNewName(e.target.value)}/>
         <input type="text" placeholder='Transaction Amount' onChange={(e)=>setNewAmount(e.target.value)}/>
         <button onClick={add}>ADD</button>
-        <button onClick={()=> {
-            console.log(state);
-        }}>STATE</button>
     </div>
   )
 }

@@ -3,11 +3,12 @@ import Axios from "axios"
 import { transactionContext } from '../Context/transactionContext'
 
 const TransactionList = () => {
-    const {state, retrieveTransactions} = useContext(transactionContext)
+    const {state, retrieveTransactions, deleteTransactionFromState} = useContext(transactionContext)
 
 
 const deleteTransaction = (item) => {
-Axios.delete(`http://localhost:3001/delete/${item._id}`)
+Axios.delete(`http://localhost:3001/delete/${item._id}`);
+deleteTransactionFromState(item._id)
 }
 
 useEffect(()=> {

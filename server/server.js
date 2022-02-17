@@ -30,7 +30,6 @@ app.post("/new", (req, res)=> {
         name: newName,
         amount: newAmount
     }).then((response)=> {
-console.log(response._id);
 res.send(response._id)
     })
 
@@ -39,9 +38,8 @@ res.send(response._id)
 
 app.delete("/delete/:id", async (req, res)=> {
 const id = req.params.id
-        // const deleted = await Transaction.findByIdAndDelete(id)
-        console.log(id)
-        // console.log(deleted)
+        const deleted = await Transaction.findByIdAndDelete(id)
+        console.log(deleted)
 })
 
 app.listen(PORT, ()=> {

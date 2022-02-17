@@ -9,6 +9,9 @@ return [...state,
 }]
 case "RETRIEVE":
     return state = action.payload
+
+    case "DELETE":
+    return state.filter(item => item._id !== action.payload)
     default: 
     return state
 }
