@@ -42,6 +42,16 @@ const id = req.params.id
         console.log(deleted)
 })
 
+app.put("/update/:id", async (req, res)=> {
+    const id = req.params.id
+    const newName = req.body.name
+    const newAmount = req.body.amount
+    const updated = await Transaction.findByIdAndUpdate(id, {name: newName, amount:newAmount })
+    console.log(updated);
+    console.log("updated");
+
+})
+
 app.listen(PORT, ()=> {
     db.once("open", ()=> {
         console.log("SERVER STARTED, CONNECTED TO DB");
