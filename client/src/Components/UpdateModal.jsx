@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Axios from "axios";
+import { transactionContext } from "../Context/transactionContext";
 
 const UpdateModal = ({ setUpdate, item }) => {
   const [newName, setNewName] = useState("initial");
   const [newAmount, setNewAmount] = useState(0);
+  const { updateTransactionState } = useContext(transactionContext);
 
   const updateTransaction = (item) => {
     Axios.put(`http://localhost:3001/update/${item._id}`, {
@@ -11,6 +13,7 @@ const UpdateModal = ({ setUpdate, item }) => {
       amount: newAmount,
     });
     setUpdate(false);
+    updateTransactionState(newName, newAmount, item._id);
   };
 
   return (
