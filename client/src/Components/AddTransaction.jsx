@@ -13,19 +13,22 @@ const AddTransaction = () => {
     buttonDisabled = false;
   }
 
+  let transactionType;
+
   const add = () => {
     Axios.post("http://localhost:3001/new", {
       name: newName,
       amount: newAmount,
+      income: transactionType,
     }).then((response) => {
       addTransaction(newName, newAmount, response.data);
-      setNewAmount("qwe");
-      setNewName("qwe");
+      setNewAmount("");
+      setNewName("");
     });
   };
   return (
     <div className="flex justify-around items-center" style={{ height: "20%" }}>
-      <div className="w-10/12 flex">
+      <div className="w-9/12 flex">
         <input
           className="w-3/6 p-2 m-2 bg-gray-300 placeholder-black placeholder-opacity-40 font-semibold rounded-lg"
           type="text"
@@ -35,19 +38,34 @@ const AddTransaction = () => {
         />
         <input
           className="w-3/6 p-2 m-2 bg-gray-300 placeholder-black placeholder-opacity-40 font-semibold rounded-lg"
-          type="text"
+          type="number"
           value={newAmount}
           placeholder="Transaction Amount"
           onChange={(e) => setNewAmount(e.target.value)}
         />
       </div>
-      <button
-        className="w-fit h-fit p-2  border-black border-2 rounded-lg  hover:bg-gray-300 hover:border-2 transition ease-in-out duration-150 hover:scale-110"
-        onClick={add}
-        disabled={buttonDisabled}
-      >
-        ADD
-      </button>
+      <div className="flex flex-col text-sm items-center justify-center">
+        <button
+          className="w-fit h-fit p-1 border-black border-2 rounded-lg  hover:bg-green-300 hover:border-2 transition ease-in-out duration-150 hover:scale-110"
+          onClick={() => {
+            transactionType = true;
+            add();
+          }}
+          disabled={buttonDisabled}
+        >
+          Add Income
+        </button>
+        <button
+          className="w-fit h-fit p-1 border-black border-2 rounded-lg  hover:bg-red-300 hover:border-2 transition ease-in-out duration-150 hover:scale-110"
+          onClick={() => {
+            transactionType = false;
+            add();
+          }}
+          disabled={buttonDisabled}
+        >
+          Add Expense
+        </button>
+      </div>
     </div>
   );
 };

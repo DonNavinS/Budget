@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="flex justify-center items-center h-screen bg-slate-300">
       <div
-        className="flex flex-col items-center w-4/12 border-black border-2 bg-slate-100"
+        className="flex flex-col items-center w-5/12 border-black border-2 bg-slate-100"
         style={{ height: "80%" }}
       >
         <Header />

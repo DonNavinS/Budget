@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import UpdateModal from "./UpdateModal";
 
-const UpdateTransaction = ({ item }) => {
-  const [update, setUpdate] = useState(false);
-
+const UpdateTransaction = ({ item, update, setUpdate }) => {
   return (
     <div>
       <button onClick={() => setUpdate(true)}>UPDATE</button>

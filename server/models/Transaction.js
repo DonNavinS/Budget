@@ -1,16 +1,20 @@
-const {model, Schema} = require("mongoose")
+const { model, Schema } = require("mongoose");
 
 const transactionSchema = new Schema({
-name: {
+  name: {
     type: String,
-    required:true
-},
-amount: {
-    type: String,
-    required: true
-}
-})
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  income: {
+    type: Boolean,
+    required: true,
+  },
+});
 
-const Transaction = model("Transaction", transactionSchema)
+const Transaction = model("Transaction", transactionSchema);
 
-module.exports = {Transaction}
+module.exports = { Transaction };

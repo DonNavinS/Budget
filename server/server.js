@@ -21,10 +21,13 @@ app.get("/retrieve", async (req, res) => {
 app.post("/new", (req, res) => {
   const newName = req.body.name;
   const newAmount = req.body.amount;
+  const newIncome = req.body.income;
+
   console.log("NEW TRANSACTION CREATED");
   Transaction.create({
     name: newName,
     amount: newAmount,
+    income: newIncome,
   }).then((response) => {
     res.send(response._id);
   });
