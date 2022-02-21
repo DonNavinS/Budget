@@ -1,19 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import Axios from "axios";
 import { transactionContext } from "../Context/transactionContext";
-import UpdateTransaction from "./UpdateTransaction";
-import DeleteTransaction from "./DeleteTransaction";
+import RecentTransactions from "./RecentTransactions";
 
 const TransactionList = () => {
   const { state, retrieveTransactions } = useContext(transactionContext);
-  const [hover, setHover] = useState(true);
   const [recentList, setRecentList] = useState("all");
 
-  let hoverEffects;
-  hover
-    ? (hoverEffects =
-        "hover:scale-105 hover:bg-gray-400 transition duration-75")
-    : (hoverEffects = "");
+  const renderAll = state;
+  const renderIncome = state.filter((transaction) => transaction.income);
+  const renderExpenses = state.filter((transaction) => !transaction.income);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/retrieve").then((response) => {
@@ -51,41 +47,13 @@ const TransactionList = () => {
           Recent Expenses
         </button>
       </div>
-      <div
-        className="w-full flex flex-col items-center overflow-auto"
-        style={{ height: "80%" }}
-      >
-        {state?.map((item) => (
-          <div
-            key={item._id}
-            className={`flex justify-between w-10/12 rounded ${hoverEffects}`}
-          >
-            {item.income === true ? (
-              <div className="bg-green-500" style={{ width: "1%" }}></div>
-            ) : (
-              <div className="bg-red-500" style={{ width: "1%" }}></div>
-            )}
-            <div className="flex justify-center w-3/12 ">
-              <h1>{item.name}</h1>
-            </div>
-            {item.income ? (
-              <div className="flex justify-center w-3/12 ">
-                <h1>{item.amount}</h1>
-              </div>
-            ) : (
-              <div className="flex justify-center w-3/12 ">
-                <h1>-{item.amount}</h1>
-              </div>
-            )}
-            <div className="flex justify-center w-3/12 ">
-              <DeleteTransaction item={item} />
-            </div>
-            <div className="flex justify-center w-3/12 ">
-              <UpdateTransaction item={item} setHover={setHover} />
-            </div>
-          </div>
-        ))}
-      </div>
+      {recentList === "all" && <RecentTransactions renderType={renderAll} />}
+      {recentList === "incomes" && (
+        <RecentTransactions renderType={renderIncome} />
+      )}
+      {recentList === "expenses" && (
+        <RecentTransactions renderType={renderExpenses} />
+      )}
     </div>
   );
 };
