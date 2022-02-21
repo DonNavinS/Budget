@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Axios from "axios";
 import { transactionContext } from "../Context/transactionContext";
 
-const UpdateModal = ({ setUpdate, item }) => {
+const UpdateModal = ({ setShowModal, item, setHover }) => {
   const [newName, setNewName] = useState("");
   const [newAmount, setNewAmount] = useState(0);
   const { updateTransactionState } = useContext(transactionContext);
@@ -15,12 +15,13 @@ const UpdateModal = ({ setUpdate, item }) => {
       name: newName,
       amount: newAmount,
     });
-    setUpdate(false);
+    setShowModal(false);
     updateTransactionState(newName, newAmount, item._id, item.income);
   };
+
   return (
     <div
-      className={`absolute inset-y-36 inset-x-80 rounded-lg  flex flex-col justify-center items-center`}
+      className={`absolute inset-y-36 inset-x-80 rounded-lg bg-red-300 flex flex-col justify-center items-center`}
     >
       <div className="" style={{ height: "20%" }}>
         <h1 className="text-4xl font-semibold">Update Transaction</h1>
@@ -47,13 +48,19 @@ const UpdateModal = ({ setUpdate, item }) => {
           <button
             className="rounded p-1 m-2 border-2 border-black hover:text-white hover:scale-110 transition duration-100"
             disabled={buttonDisabled}
-            onClick={() => updateTransaction(item)}
+            onClick={() => {
+              updateTransaction(item);
+              setHover(true);
+            }}
           >
             Update
           </button>
           <button
             className="rounded p-1 m-2 border-2 border-black hover:text-white hover:scale-110 transition duration-100"
-            onClick={() => setUpdate(false)}
+            onClick={() => {
+              setShowModal(false);
+              setHover(true);
+            }}
           >
             Close
           </button>
