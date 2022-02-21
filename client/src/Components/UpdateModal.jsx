@@ -16,11 +16,12 @@ const UpdateModal = ({ setUpdate, item }) => {
       amount: newAmount,
     });
     setUpdate(false);
-    updateTransactionState(newName, newAmount, item._id);
+    updateTransactionState(newName, newAmount, item._id, item.income);
   };
-
   return (
-    <div className="absolute inset-y-36 inset-x-80 rounded-lg bg-red-400 flex flex-col justify-center items-center">
+    <div
+      className={`absolute inset-y-36 inset-x-80 rounded-lg  flex flex-col justify-center items-center`}
+    >
       <div className="" style={{ height: "20%" }}>
         <h1 className="text-4xl font-semibold">Update Transaction</h1>
       </div>

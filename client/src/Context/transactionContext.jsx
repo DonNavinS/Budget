@@ -16,13 +16,14 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
-  const addTransaction = (name, amount, id) => {
+  const addTransaction = (name, amount, id, income) => {
     dispatch({
       type: "ADD",
       payload: {
         name: name,
         amount: amount,
         _id: id,
+        income: income,
       },
     });
   };
@@ -34,13 +35,14 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
-  const updateTransactionState = (name, amount, id) => {
+  const updateTransactionState = (name, amount, id, income) => {
     dispatch({
       type: "UPDATE",
       payload: {
         name: name,
         amount: amount,
         _id: id,
+        income: income,
       },
     });
   };

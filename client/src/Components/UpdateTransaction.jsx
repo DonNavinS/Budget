@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import UpdateModal from "./UpdateModal";
 
 const UpdateTransaction = ({ item, update, setUpdate }) => {

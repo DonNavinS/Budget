@@ -7,6 +7,7 @@ export default (state, action) => {
           name: action.payload.name,
           amount: action.payload.amount,
           _id: action.payload._id,
+          income: action.payload.income,
         },
       ];
     case "RETRIEVE":
@@ -25,6 +26,7 @@ export default (state, action) => {
           name: action.payload.name,
           amount: action.payload.amount,
           _id: action.payload._id,
+          income: action.payload.income,
         },
         ...secondSegment,
       ];

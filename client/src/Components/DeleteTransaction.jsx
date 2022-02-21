@@ -9,6 +9,7 @@ const DeleteTransaction = ({ item }) => {
     Axios.delete(`http://localhost:3001/delete/${item._id}`);
     deleteTransactionFromState(item._id);
   };
+
   return <button onClick={() => deleteTransaction(item)}>DELETE</button>;
 };
 

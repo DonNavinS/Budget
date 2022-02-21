@@ -7,6 +7,7 @@ import DeleteTransaction from "./DeleteTransaction";
 const TransactionList = () => {
   const { state, retrieveTransactions } = useContext(transactionContext);
   const [update, setUpdate] = useState(false);
+  const [recentList, setRecentList] = useState("all");
 
   let hoverEffects;
   !update
@@ -24,8 +25,31 @@ const TransactionList = () => {
       className="flex flex-col items-center justify-center w-full "
       style={{ height: "70%" }}
     >
-      <div style={{ height: "20%" }}>
-        <h1 className="my-3 font-medium text-lg">Recent Transactions</h1>
+      <div className="flex gap-x-6" style={{ height: "20%" }}>
+        <button
+          onClick={() => {
+            setRecentList("all");
+          }}
+          className="my-3 font-medium text-lg"
+        >
+          Recent Transactions
+        </button>
+        <button
+          onClick={() => {
+            setRecentList("incomes");
+          }}
+          className="my-3 font-medium text-lg"
+        >
+          Recent Income
+        </button>
+        <button
+          onClick={() => {
+            setRecentList("expenses");
+          }}
+          className="my-3 font-medium text-lg"
+        >
+          Recent Expenses
+        </button>
       </div>
       <div
         className="w-full flex flex-col items-center overflow-auto"
@@ -37,7 +61,7 @@ const TransactionList = () => {
               key={item._id}
               className={`flex justify-between w-10/12 rounded ${hoverEffects}`}
             >
-              {item.income ? (
+              {item.income === true ? (
                 <div className="bg-green-500" style={{ width: "1%" }}></div>
               ) : (
                 <div className="bg-red-500" style={{ width: "1%" }}></div>

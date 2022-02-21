@@ -13,19 +13,18 @@ const AddTransaction = () => {
     buttonDisabled = false;
   }
 
-  let transactionType;
-
-  const add = () => {
+  const add = (transactionType) => {
     Axios.post("http://localhost:3001/new", {
       name: newName,
       amount: newAmount,
       income: transactionType,
     }).then((response) => {
-      addTransaction(newName, newAmount, response.data);
+      addTransaction(newName, newAmount, response.data, transactionType);
       setNewAmount("");
       setNewName("");
     });
   };
+
   return (
     <div className="flex justify-around items-center" style={{ height: "20%" }}>
       <div className="w-9/12 flex">
@@ -48,8 +47,7 @@ const AddTransaction = () => {
         <button
           className="w-fit h-fit p-1 border-black border-2 rounded-lg  hover:bg-green-300 hover:border-2 transition ease-in-out duration-150 hover:scale-110"
           onClick={() => {
-            transactionType = true;
-            add();
+            add(true);
           }}
           disabled={buttonDisabled}
         >
@@ -58,8 +56,7 @@ const AddTransaction = () => {
         <button
           className="w-fit h-fit p-1 border-black border-2 rounded-lg  hover:bg-red-300 hover:border-2 transition ease-in-out duration-150 hover:scale-110"
           onClick={() => {
-            transactionType = false;
-            add();
+            add(false);
           }}
           disabled={buttonDisabled}
         >
