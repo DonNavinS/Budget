@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { connectionString } = require("./config");
+const path = require("path");
 
 const express = require("express");
 const app = express();
@@ -8,6 +9,7 @@ const cors = require("cors");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.static(path.resolve(__dirname, "./client/dist")));
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 const db = mongoose.connection;
@@ -54,6 +56,10 @@ app.put("/update/:id", async (req, res) => {
   } catch (e) {
     console.log(e);
   }
+});
+
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
 app.listen(PORT, () => {
