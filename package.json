@@ -16,7 +16,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
+    "postinstall": "ng build",
+    "build": "ng build",
+    "heroku-postbuild": "ng build --prod"
   },
   "repository": {
     "type": "git",
@@ -28,5 +30,5 @@
   "bugs": {
     "url": "https://github.com/DonNavinS/Budget/issues"
   },
-  "homepage": "https://github.com/DonNavinS/Budget#readme"
+  "homepage": "https://navin-budget-tracker.herokuapp.com/"
 }

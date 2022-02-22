@@ -9,12 +9,11 @@ const cors = require("cors");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.static(path.resolve(__dirname, "./client/dist")));
+app.use(express.static(path.join(__dirname, "..", "client", "dist")));
 
 mongoose.connect(connectionString, { useNewUrlParser: true });
 const db = mongoose.connection;
 const { Transaction } = require("./models/Transaction");
-const { response } = require("express");
 
 app.get("/retrieve", async (req, res) => {
   const transactions = await Transaction.find();
@@ -56,10 +55,6 @@ app.put("/update/:id", async (req, res) => {
   } catch (e) {
     console.log(e);
   }
-});
-
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
 app.get("/", (req, res) => {
