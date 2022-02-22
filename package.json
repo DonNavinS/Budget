@@ -16,8 +16,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
-    "postinstall": "ng build",
-    "build": "ng build",
     "heroku-postbuild": "ng build --prod"
   },
   "repository": {

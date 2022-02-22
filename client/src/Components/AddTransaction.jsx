@@ -14,7 +14,7 @@ const AddTransaction = () => {
   }
 
   const add = (transactionType) => {
-    Axios.post("http://localhost:3001/new", {
+    Axios.post("https://navin-budget-tracker.herokuapp.com/new", {
       name: newName,
       amount: newAmount,
       income: transactionType,
