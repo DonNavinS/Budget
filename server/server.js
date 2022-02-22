@@ -6,6 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const cors = require("cors");
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
