@@ -26,7 +26,7 @@ const TransactionList = () => {
           onClick={() => {
             setRecentList("all");
           }}
-          className="my-3 font-medium text-lg"
+          className="my-5 font-medium text-lg link link-underline link-underline-black"
         >
           Recent Transactions
         </button>
@@ -34,7 +34,7 @@ const TransactionList = () => {
           onClick={() => {
             setRecentList("incomes");
           }}
-          className="my-3 font-medium text-lg"
+          className="my-5 font-medium text-lg link link-underline link-underline-black"
         >
           Recent Income
         </button>
@@ -42,7 +42,7 @@ const TransactionList = () => {
           onClick={() => {
             setRecentList("expenses");
           }}
-          className="my-3 font-medium text-lg"
+          className="my-5 font-medium text-lg link link-underline link-underline-black"
         >
           Recent Expenses
         </button>
