@@ -12,9 +12,11 @@ const TransactionList = () => {
   const renderExpenses = state.filter((transaction) => !transaction.income);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/retrieve").then((response) => {
-      retrieveTransactions(response.data);
-    });
+    Axios.get("https://navin-budget-tracker.herokuapp.com/retrieve").then(
+      (response) => {
+        retrieveTransactions(response.data);
+      }
+    );
   }, []);
   return (
     <div
