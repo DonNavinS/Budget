@@ -62,6 +62,9 @@ app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
+app.get("/", (req, res) => {
+  res.send("Express server working from heroku");
+});
 app.listen(PORT, () => {
   db.once("open", () => {
     console.log("SERVER STARTED, CONNECTED TO DB");
