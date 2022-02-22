@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(path.resolve(__dirname, "./client/dist")));
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(connectionString, { useNewUrlParser: true });
 const db = mongoose.connection;
 const { Transaction } = require("./models/Transaction");
 const { response } = require("express");
